@@ -1,0 +1,11 @@
+{
+	"name": "pummel_bot",
+	"version": "1.0.0",
+	"description": "Discord bot for the Pummel Boys",
+	"main": "bot.js",
+	"author": "Kevin Lee",
+	"dependencies": {
+		"discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
+		"winston": "^3.2.1"
+	}
+}
