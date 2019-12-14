@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const axios = require('axios');
-const auth = require('./auth.json');
+// const auth = require('./auth.json');
 
 const instance = axios.create({
   baseURL: 'https://api.twitch.tv/kraken/',
