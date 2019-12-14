@@ -7,7 +7,8 @@ const instance = axios.create({
   timeout: 1000,
   headers: {
     'Accept': 'application/vnd.twitchtv.v5+json',
-    'Client-ID': auth.twitch_client_id
+    // 'Client-ID': auth.twitch_client_id
+    'Client-ID': process.env.TWITCH_CLIENT_ID
   }
 });
 
@@ -16,16 +17,30 @@ const client = new Discord.Client()
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
+  // setInterval(() => checkStreamStatus(29093531), 1000)
 });
 
-// TODO switch to ES6 so we can use async/await
+const checkStreamStatus = channelID => {
+  instance.get(`streams/${channelID}`)
+    .then(response => {
+      if (response.stream !== undefined) {
+        console.log(response.stream)
+        console.log("Alvin is online. https://twitch.tv/songmeister")
+      } else {
+        console.log("Alvin is not online. :(")
+      }
+    })
+    .catch(error => {
+      console.log(error)
+    })
+}
 
+// TODO switch to ES6 so we can use async/await
 // TODO function for translating username to user ID
-// TODO make this function accept the user ID
 const isKingOnline = (msg) => {
   instance.get('streams/29093531')
     .then(response => {
-      if (response.stream !== null) {
+      if (response.stream !== undefined) {
         msg.reply("Alvin is online. https://twitch.tv/songmeister")
       } else {
         msg.reply("Alvin is not online :(")
@@ -46,4 +61,5 @@ client.on('message', msg => {
   }
 });
 
-client.login(auth.discord_token)
+// client.login(auth.discord_token)
+client.login(process.env.DISCORD_TOKEN)

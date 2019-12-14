@@ -4,6 +4,9 @@
 	"description": "Discord bot for the Pummel Boys",
 	"main": "bot.js",
 	"author": "Kevin Lee",
+	"scripts": {
+		"start": "node bot.js"
+	},
 	"dependencies": {
 		"axios": "^0.19.0",
 		"discord.js": "github:discordjs/discord.js"
