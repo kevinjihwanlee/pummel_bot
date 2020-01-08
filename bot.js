@@ -1,6 +1,9 @@
 const Discord = require('discord.js');
 const axios = require('axios');
-// const auth = require('./auth.json');
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 
 const instance = axios.create({
   baseURL: 'https://api.twitch.tv/kraken/',
@@ -40,7 +43,7 @@ const checkStreamStatus = channelID => {
 const isKingOnline = (msg) => {
   instance.get('streams/29093531')
     .then(response => {
-      if (response.stream !== undefined) {
+      if (response.data.stream !== undefined) {
         msg.reply("Alvin is online. https://twitch.tv/songmeister")
       } else {
         msg.reply("Alvin is not online :(")
